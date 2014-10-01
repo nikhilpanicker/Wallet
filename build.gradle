@@ -1,0 +1,46 @@
+buildscript {
+    repositories {
+	    maven { url "http://repo.spring.io/snapshot" }
+	    maven { url "http://repo.spring.io/milestone" }
+	    maven { url "http://repo.spring.io/release" }
+            mavenCentral()
+	    mavenLocal()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.6.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'wallet'
+    version =  '0.1.0'
+}
+
+bootRepackage {
+    mainClass = 'hello.HelloConfig'
+}
+
+repositories {
+    mavenCentral()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+    maven { url "http://repo.spring.io/release" }
+ }
+
+dependencies{
+compile 'com.google.code.gson:gson:2.2.4'
+compile 'org.slf4j:slf4j-api:1.7.5'
+compile "org.scala-lang:scala-library:2.11.2"
+compile("org.springframework.boot:spring-boot-starter-web:1.1.6.RELEASE")
+testCompile "junit:junit:4.11"
+}
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}
