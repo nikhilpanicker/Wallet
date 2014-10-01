@@ -5,13 +5,11 @@ import org.hibernate.validator.constraints.NotBlank
 
 class WebaccCreation {
  
- // @JsonProperty("login_id")
   var start = 900000
   var end   = 1000000
   var rnd = new scala.util.Random
   @JsonProperty("login_id")
   var login_id : Int = start + rnd.nextInt( (end - start) + 1 )
- // var login_id : Int = _
  @NotBlank(message = "URL cannot be blank!")
   @JsonProperty("url")
   var url :String = _
@@ -21,7 +19,6 @@ class WebaccCreation {
   @NotBlank(message = "Password cannot be blank!")
   @JsonProperty("password")
   var password :String  = _
- // @NotBlank(message = "User ID cannot be blank!")
    @JsonProperty("user_id")
   var user_id:String = _
 

@@ -21,6 +21,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.ErrorMessages
 import org.springframework.validation.FieldError
 import java.util.List
+import java.util.Date
 import org.springframework.validation.ObjectError
 //import hello.ErrorMessage
 
@@ -49,10 +50,9 @@ class HelloWorldController {
 	
   
   user.id  = start + rnd.nextInt( (end - start) + 1 )
-
-   // val user = new UserCreation()
+	user.creationdt = new Date().toString()
+	user.updateddt = new Date().toString()
     mapobj += (user.id -> user)
-    // get userid value back and add to map here
     return user
   }
 
@@ -61,7 +61,6 @@ class HelloWorldController {
 
     var viewuser: UserCreation = null;
     if (mapobj.contains(id)) {
-      //some code here
       viewuser = mapobj.get(id).get
     }
     return viewuser
@@ -72,6 +71,10 @@ class HelloWorldController {
   def updateuser(@Valid @RequestBody user: UserCreation,@PathVariable("user_id") id: Int) : UserCreation = {
 
     //	var olduser : UserCreation = mapobj.get(id)
+	user.updateddt = new Date().toString()
+	var userdt : UserCreation = mapobj.get(id).get
+	var tempDateVal : String = userdt.creationdt
+	user.creationdt= tempDateVal
     mapobj -= user.id
 	user.id = id
     mapobj += (user.id -> user)
@@ -82,7 +85,6 @@ class HelloWorldController {
   @RequestMapping(value = Array("/api/v1/users/{user_id}/idcards"), method = Array(RequestMethod.POST))
   def idcardcreation(@Valid @RequestBody useridcard: ICardCreation,@PathVariable("user_id") id: Int) : ICardCreation = {
 
-   // val useridcard = new ICardCreation()
    useridcard.user_id=id
    icardCreationList+=useridcard
     Icardmapobj += (useridcard.user_id -> useridcard)
@@ -92,12 +94,6 @@ class HelloWorldController {
   @RequestMapping(value = Array("/api/v1/users/{user_id}/idcards"), method = Array(RequestMethod.GET))
   def idcardview(@PathVariable("user_id") id: Int) :ArrayList[ICardCreation]  = {
 
-   /* var viewidcarduser: ICardCreation = null;
-    if (Icardmapobj.contains(id)) {
-      //some code here
-      viewidcarduser = Icardmapobj.get(id).get
-    }
-    return viewidcarduser */
 	val currentCardList = new ArrayList[ICardCreation]
 	for (tempcardlist <- icardCreationList)
 	{
@@ -119,26 +115,25 @@ class HelloWorldController {
   def idcarddelete(@Valid @RequestBody useridcard: ICardCreation,@PathVariable("card_id") cardId: Int) = {
 
    
-		for (tempcarddeletelist <- icardCreationList)
+	for (tempcarddeletelist <- icardCreationList)
 	{
 	
-	if(tempcarddeletelist.card_id.equals(cardId))
+	 if(tempcarddeletelist.card_id.equals(cardId))
 	  {
-		
 		icardCreationList -=tempcarddeletelist
 	  }
 	 
 	}
   }
+  
   @ResponseStatus(HttpStatus.CREATED)
   @RequestMapping(value = Array("/api/v1/users/{user_id}/weblogins"), method = Array(RequestMethod.POST))
   def Webacccreate(@Valid @RequestBody webacc: WebaccCreation,@PathVariable("user_id") id: String) : WebaccCreation  = {
 
-   // val webacc = new WebaccCreation()
    webacc.user_id=id
    webCreationList+=webacc
    return webacc
-    //WebAccmapobj +=(webacc.login_id -> webacc)
+
   }
 
   @RequestMapping(value = Array("/api/v1/users/{user_id}/weblogins"), method = Array(RequestMethod.GET))
@@ -179,10 +174,6 @@ class HelloWorldController {
   @RequestMapping(value = Array("/api/v1/users/{user_id}/bankaccounts"), method = Array(RequestMethod.POST))
   def bankacccreate(@Valid @RequestBody bankacc: BankaccCreation,@PathVariable("user_id") id: String) : BankaccCreation = {
 
-  //  val bankacc = new BankaccCreation()
-   // BankAccmapobj +=(bankacc.ba_id -> bankacc)
-	//bankAccCreationList += bankacc
-  //  addviewobj2 +=bankacc
     bankacc.user_id=id
 	bankAccCreationList +=bankacc
 	return bankacc
@@ -194,7 +185,6 @@ class HelloWorldController {
     val currentBankUserList = new ArrayList[BankaccCreation]
 	for (tempBankAcclist <- bankAccCreationList)
 	{
-	//println("user id in IDcard bean "+tempcardlist.user_id )
 	if(tempBankAcclist.user_id.equals(id))
 	  {
 		

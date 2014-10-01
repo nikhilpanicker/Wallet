@@ -9,9 +9,7 @@ class BankaccCreation {
   var start = 10550000
   var end   = 20550000
   var rnd = new scala.util.Random
-	
-  //@JsonProperty("ba_id")
-  //var ba_id : Int = start + rnd.nextInt( (end - start) + 1 )
+
   @NotBlank(message = "Bank Id cannot be blank!")
   @JsonProperty("ba_id")
   var ba_id : String = _
@@ -24,7 +22,6 @@ class BankaccCreation {
   @NotBlank(message = "Account Number cannot be blank!")
   @JsonProperty("account_number")
   var account_number:String  = _
- // @NotBlank(message = "User Id cannot be blank!")
   @JsonProperty("user_id")
   var user_id:String = _
 
@@ -37,7 +34,6 @@ class BankaccCreation {
     this.account_number = account_number
     this.ba_id = ba_id
 	this.user_id = user_id
-
 }
   
 }

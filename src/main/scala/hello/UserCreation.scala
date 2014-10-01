@@ -4,6 +4,8 @@ import scala.beans.BeanProperty
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.hibernate.validator.constraints.NotBlank
+//import java.util.Calendar
+import java.util.Date
 
 
 class UserCreation(){
@@ -24,19 +26,20 @@ class UserCreation(){
   @NotBlank(message = "Password cannot be blank!")
   @JsonProperty("password")
   var password:String  = _
-  //@NotBlank(message = "Date cannot be blank!")
-  @JsonProperty("creationdate")
-  var creationdate: Long = System.currentTimeMillis / 1000
-  var creationdt: String = creationdate.toString()
+ @JsonProperty("creationdate")
+ var creationdt : String = _
+ @JsonProperty("updateddate")
+ var updateddt : String = _
   
   
-  def this(email:String,password:String,creationdt:String,id: Int) {
+  def this(email:String,password:String,creationdt:String,id: Int,updateddt : String) {
     this()
-    //this.id = id
+   
     this.email = email
     this.password = password
     this.creationdt = creationdt
 	this.id = id
+	this.updateddt = updateddt
   }
   
   
