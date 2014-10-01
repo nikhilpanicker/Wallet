@@ -39,7 +39,7 @@ class HelloWorldController {
   var bankAccCreationList = new ListBuffer[BankaccCreation]()
 
    @ResponseStatus(HttpStatus.CREATED)
-  @RequestMapping(value = Array("/users"), method = Array(RequestMethod.POST)) //def createuser (@RequestParam(value="email", required=true)  email : String , @RequestParam(value="password", required=true)  password : String) = {
+  @RequestMapping(value = Array("/api/v1/users"), method = Array(RequestMethod.POST)) //def createuser (@RequestParam(value="email", required=true)  email : String , @RequestParam(value="password", required=true)  password : String) = {
   def createuser(@Valid @RequestBody user: UserCreation) : UserCreation = {
 
    // println("Email from req is " + user.email + "pass");
@@ -56,7 +56,7 @@ class HelloWorldController {
     return user
   }
 
-  @RequestMapping(value = Array("/users/{user_id}"), method = Array(RequestMethod.GET))
+  @RequestMapping(value = Array("/api/v1/users/{user_id}"), method = Array(RequestMethod.GET))
   def viewuser(@PathVariable("user_id") id: Int): UserCreation = {
 
     var viewuser: UserCreation = null;
@@ -68,7 +68,7 @@ class HelloWorldController {
   }
 
    @ResponseStatus(HttpStatus.CREATED)
-  @RequestMapping(value = Array("/users/{user_id}"), method = Array(RequestMethod.PUT))
+  @RequestMapping(value = Array("/api/v1/users/{user_id}"), method = Array(RequestMethod.PUT))
   def updateuser(@Valid @RequestBody user: UserCreation,@PathVariable("user_id") id: Int) : UserCreation = {
 
     //	var olduser : UserCreation = mapobj.get(id)
@@ -79,7 +79,7 @@ class HelloWorldController {
 	return user
   }
   @ResponseStatus(HttpStatus.CREATED)
-  @RequestMapping(value = Array("/users/{user_id}/idcards"), method = Array(RequestMethod.POST))
+  @RequestMapping(value = Array("/api/v1/users/{user_id}/idcards"), method = Array(RequestMethod.POST))
   def idcardcreation(@Valid @RequestBody useridcard: ICardCreation,@PathVariable("user_id") id: Int) : ICardCreation = {
 
    // val useridcard = new ICardCreation()
@@ -89,7 +89,7 @@ class HelloWorldController {
 	return useridcard
   }
 
-  @RequestMapping(value = Array("/users/{user_id}/idcards"), method = Array(RequestMethod.GET))
+  @RequestMapping(value = Array("/api/v1/users/{user_id}/idcards"), method = Array(RequestMethod.GET))
   def idcardview(@PathVariable("user_id") id: Int) :ArrayList[ICardCreation]  = {
 
    /* var viewidcarduser: ICardCreation = null;
@@ -115,7 +115,7 @@ class HelloWorldController {
 	return currentCardList
   }
    @ResponseStatus(HttpStatus.NO_CONTENT)
-  @RequestMapping(value = Array("/users/{user_id}/idcards/{card_id}"), method = Array(RequestMethod.DELETE))
+  @RequestMapping(value = Array("/api/v1/users/{user_id}/idcards/{card_id}"), method = Array(RequestMethod.DELETE))
   def idcarddelete(@Valid @RequestBody useridcard: ICardCreation,@PathVariable("card_id") cardId: Int) = {
 
    
@@ -131,7 +131,7 @@ class HelloWorldController {
 	}
   }
   @ResponseStatus(HttpStatus.CREATED)
-  @RequestMapping(value = Array("/users/{user_id}/weblogins"), method = Array(RequestMethod.POST))
+  @RequestMapping(value = Array("/api/v1/users/{user_id}/weblogins"), method = Array(RequestMethod.POST))
   def Webacccreate(@Valid @RequestBody webacc: WebaccCreation,@PathVariable("user_id") id: String) : WebaccCreation  = {
 
    // val webacc = new WebaccCreation()
@@ -141,7 +141,7 @@ class HelloWorldController {
     //WebAccmapobj +=(webacc.login_id -> webacc)
   }
 
-  @RequestMapping(value = Array("/users/{user_id}/weblogins"), method = Array(RequestMethod.GET))
+  @RequestMapping(value = Array("/api/v1/users/{user_id}/weblogins"), method = Array(RequestMethod.GET))
   def viewwebacc(@PathVariable("user_id") id: String) : ArrayList[WebaccCreation] = {
   
     var currentWebUserList = new ArrayList[WebaccCreation]
@@ -160,7 +160,7 @@ class HelloWorldController {
   }
     
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-  	@RequestMapping(value = Array("/users/{user_id}/weblogins/{login_id}"), method = Array(RequestMethod.DELETE))
+  	@RequestMapping(value = Array("/api/v1/users/{user_id}/weblogins/{login_id}"), method = Array(RequestMethod.DELETE))
   def deletewebacc(@Valid @RequestBody webacc: WebaccCreation,@PathVariable("login_id") loginId: Int) = {
 
 	for (tempWebDeleteList <- webCreationList)
@@ -176,7 +176,7 @@ class HelloWorldController {
   }
   
   @ResponseStatus(HttpStatus.CREATED)
-  @RequestMapping(value = Array("/users/{user_id}/bankaccounts"), method = Array(RequestMethod.POST))
+  @RequestMapping(value = Array("/api/v1/users/{user_id}/bankaccounts"), method = Array(RequestMethod.POST))
   def bankacccreate(@Valid @RequestBody bankacc: BankaccCreation,@PathVariable("user_id") id: String) : BankaccCreation = {
 
   //  val bankacc = new BankaccCreation()
@@ -188,7 +188,7 @@ class HelloWorldController {
 	return bankacc
   }
 
-  @RequestMapping(value = Array("/users/{user_id}/bankaccounts"), method = Array(RequestMethod.GET))
+  @RequestMapping(value = Array("/api/v1/users/{user_id}/bankaccounts"), method = Array(RequestMethod.GET))
   def viewbankacc(@PathVariable("user_id") id: String) : ArrayList[BankaccCreation] = {
 
     val currentBankUserList = new ArrayList[BankaccCreation]
@@ -207,7 +207,7 @@ class HelloWorldController {
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  @RequestMapping(value = Array("/users/{user_id}/bankaccounts/{ba_id}"), method = Array(RequestMethod.DELETE))
+  @RequestMapping(value = Array("/api/v1/users/{user_id}/bankaccounts/{ba_id}"), method = Array(RequestMethod.DELETE))
   def deletebankacc(@Valid @RequestBody bankacc: BankaccCreation,@PathVariable("ba_id") bankid: String) = {
 
 		for (tempBankAccDeleteList <- bankAccCreationList)
