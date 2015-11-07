@@ -32,5 +32,5 @@ class ICardCreation {
 	this.card_id = card_id
 	this.expiration_date=expiration_date
 	this.user_id=user_id
-}
+	}
 }

@@ -10,7 +10,7 @@ class WebaccCreation {
   var rnd = new scala.util.Random
   @JsonProperty("login_id")
   var login_id : Int = start + rnd.nextInt( (end - start) + 1 )
- @NotBlank(message = "URL cannot be blank!")
+  @NotBlank(message = "URL cannot be blank!")
   @JsonProperty("url")
   var url :String = _
   @NotBlank(message = "Login ID cannot be blank!")
@@ -19,7 +19,7 @@ class WebaccCreation {
   @NotBlank(message = "Password cannot be blank!")
   @JsonProperty("password")
   var password :String  = _
-   @JsonProperty("user_id")
+  @JsonProperty("user_id")
   var user_id:String = _
 
   
@@ -31,5 +31,5 @@ class WebaccCreation {
     this.login = login
     this.password = password
 	this.user_id=user_id
-}
+   }
 }

@@ -34,6 +34,6 @@ class BankaccCreation {
     this.account_number = account_number
     this.ba_id = ba_id
 	this.user_id = user_id
-}
+  }
   
 }
